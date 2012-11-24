@@ -1,16 +1,16 @@
 # PHP Markdown Extra plugin for DokuWiki
     ---- plugin ----
     description: Parses PHP Markdown Extra blocks.
-    author     : Joonas Pulakka
-    email      : joonas.pulakka@iki.fi
+    author     : Joonas Pulakka, Jiang Le
+    email      : joonas.pulakka@iki.fi, smartynaoki@gmail.com
     type       : syntax
-    lastupdate : 2010-11-06
-    compatible : 2009-12-25 “Lemming” and newer
+    lastupdate : 2012-11-24
+    compatible : 2012-10-13 “Adora Belle” and newer
     depends    : 
     conflicts  :
     similar    : markdown 
     tags       : formatting, markup_language
-    downloadurl: http://madpropellerhead.com/projects/markdownextra.tgz
+    downloadurl: 
     ----
 
 ##Download and Installation

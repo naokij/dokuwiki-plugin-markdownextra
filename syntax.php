@@ -4,8 +4,8 @@
  *
  * @license GPL 3 (http://www.gnu.org/licenses/gpl.html) - NOTE: PHP Markdown
  * Extra is licensed under the BSD license. See License.text for details.
- * @version 1.02 - 6.11.2010 - PHP Markdown Extra 1.2.4 included.
- * @author Joonas Pulakka <joonas.pulakka@iki.fi>
+ * @version 1.03 - 24.11.2012 - PHP Markdown Extra 1.2.5 included.
+ * @author Joonas Pulakka <joonas.pulakka@iki.fi>, Jiang Le <smartynaoki@gmail.com>
  */
 
 if (!defined('DOKU_INC')) die();
@@ -67,7 +67,14 @@ class syntax_plugin_markdownextra extends DokuWiki_Syntax_Plugin {
                 case DOKU_LEXER_UNMATCHED :
                     if (!$renderer->meta['title']){
                         $renderer->meta['title'] = $this->_markdown_header($match);
-                        //dbg($renderer->meta);
+                    }
+                    $internallinks = $this->_internallinks($match);
+                    #dbg($internallinks);
+                    if (count($internallinks)>0){
+                        foreach($internallinks as $internallink)
+                        {
+                            $renderer->internallink($internallink);
+                        }
                     }
                     break;
                 case DOKU_LEXER_EXIT :       break;
@@ -90,7 +97,24 @@ class syntax_plugin_markdownextra extends DokuWiki_Syntax_Plugin {
         }
         return false;
     }
-
+    
+    function _internallinks($text)
+    {
+        $doc = new DOMDocument('1.0', 'UTF-8');
+        $doc->loadHTML($text);
+        $links = array();
+        if ($nodes = $doc->getElementsByTagName('a')){
+            foreach($nodes as $atag)
+            {
+                $href = $atag->getAttribute('href');
+                if (!preg_match('/^(https{0,1}:\/\/|ftp:\/\/|mailto:)/i',$href)){
+                    $links[] = $href;
+                }
+            }
+        }
+        return $links;
+    }
+    
     function _toc(&$renderer, $text)
     {
         $doc = new DOMDocument('1.0','UTF-8');
