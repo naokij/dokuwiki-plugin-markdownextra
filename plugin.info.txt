@@ -1,7 +1,7 @@
 base   markdownextra
-author Joonas Pulakka
+author Joonas Pulakka, Jiang Le
 email  joonas.pulakka@iki.fi
-date   2010-11-06
+date   2012-11-24
 name   PHP Markdown Extra plugin
 desc   Parses PHP Markdown Extra blocks.
 url    http://www.dokuwiki.org/plugin:markdownextra
