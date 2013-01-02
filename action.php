@@ -21,8 +21,16 @@ class action_plugin_markdownextra extends DokuWiki_Action_Plugin {
    function handle_parser_wikitext_preprocess(&$event, $param) {
        global $ID;
        if(substr($ID,-3) != '.md') return true;
-
-       $event->data = "<markdown>\n".$event->data."\n</markdown>";
+       
+       if ($this->getConf('frontmatter')){
+           if (preg_match('/^---\s*\n(.*?\n?)^---\s*$\n?(.+)/sm',$event->data, $match)){
+               $event->data = sprintf("%s<markdown>\n%s\n</markdown>", $match[1], $match[2]);
+           }else{
+               $event->data = "<markdown>\n".$event->data."\n</markdown>";
+           }
+       }else{
+           $event->data = "<markdown>\n".$event->data."\n</markdown>";
+       }
    }
 
 }
