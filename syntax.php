@@ -68,6 +68,7 @@ class syntax_plugin_markdownextra extends DokuWiki_Syntax_Plugin {
                     if (!$renderer->meta['title']){
                         $renderer->meta['title'] = $this->_markdown_header($match);
                     }
+                    $this->_toc($renderer, $match);
                     $internallinks = $this->_internallinks($match);
                     #dbg($internallinks);
                     if (count($internallinks)>0){
