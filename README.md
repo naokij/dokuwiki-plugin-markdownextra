@@ -4,7 +4,7 @@
     author     : Joonas Pulakka, Jiang Le
     email      : joonas.pulakka@iki.fi, smartynaoki@gmail.com
     type       : syntax
-    lastupdate : 2012-11-24
+    lastupdate : 2013-01-14
     compatible : 2012-10-13 “Adora Belle” and newer
     depends    : 
     conflicts  :
