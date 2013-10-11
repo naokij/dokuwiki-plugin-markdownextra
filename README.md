@@ -48,4 +48,16 @@ If the page name ends with ''.md'' suffix, it gets automatically parsed using PH
     </markdown>
 
 
+###Front matter
+Front matter is a text block at the top of dokuwiki page with .md suffix. It begins and ends with '—'. Looks like this:
+
+    ---
+    {{tag>test}}
+    ---
+    
+
+#### Why front matter?
+I love this markdown extra plugin, the best feature is .md suffix. And I love [tag plugin](https://www.dokuwiki.org/plugin:tag) too, but I can't use it with page with .md suffix as {{tag>tat1 tag2 tag3}} syntax will not work within <markdown></markdown>. So I added this front matter feature.
+
+
 For syntax, refer to http://michelf.com/projects/php-markdown/extra/
