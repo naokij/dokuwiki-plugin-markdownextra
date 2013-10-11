@@ -140,7 +140,7 @@ class syntax_plugin_markdownextra extends DokuWiki_Syntax_Plugin {
         $html = $doc->saveHTML();
         $html = str_replace('<!DOCTYPE html>','',$html);
         $html = preg_replace('/.+<body>/', '', $html);
-        $html = str_replace('</body>','', $html);
+        $html = preg_replace('@</body>.*</html>@','', $html);
         return $html;
     }
 
