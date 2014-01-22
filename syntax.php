@@ -101,9 +101,10 @@ class syntax_plugin_markdownextra extends DokuWiki_Syntax_Plugin {
     
     function _internallinks($text)
     {
+        $links = array();
+        if ( ! $text ) return $links;
         $doc = new DOMDocument('1.0', 'UTF-8');
         $doc->loadHTML($text);
-        $links = array();
         if ($nodes = $doc->getElementsByTagName('a')){
             foreach($nodes as $atag)
             {
