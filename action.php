@@ -19,10 +19,15 @@ class action_plugin_markdownextra extends DokuWiki_Action_Plugin {
    }
 
    function handle_parser_wikitext_preprocess(&$event, $param) {
-      global $ACT;
+       global $ACT;
        global $ID;
        global $TEXT;
-       if(substr($ID,-3) != '.md' || ($ACT != 'show' && $event->data != $TEXT)) return true;
+       // Check if file is a .md page:
+       if(substr($ID,-3) != '.md' || ) return true;
+       // Check for default view (in this case there is only 1 parsed text)
+       // or check that the text parsed is the text being edited
+       // (see: http://www.dokuwiki.org/devel:environment#text):
+       if($ACT != 'show' && $event->data != $TEXT) return true;
        
        if ($this->getConf('frontmatter')){
            if (preg_match('/^---\s*\n(.*?\n?)^---\s*$\n?(.+)/sm',$event->data, $match)){
