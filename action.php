@@ -23,7 +23,7 @@ class action_plugin_markdownextra extends DokuWiki_Action_Plugin {
        global $ID;
        global $TEXT;
        // Check if file is a .md page:
-       if(substr($ID,-3) != '.md' || ) return true;
+       if(substr($ID,-3) != '.md') return true;
        // Check for default view (in this case there is only 1 parsed text)
        // or check that the text parsed is the text being edited
        // (see: http://www.dokuwiki.org/devel:environment#text):
