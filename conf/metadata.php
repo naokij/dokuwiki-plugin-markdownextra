@@ -9,3 +9,4 @@
 
 
 $meta['frontmatter'] = array('onoff');
+$meta['markdowneditor'] = array('multichoice', '_choices' => array('none', 'meltdown'));
