@@ -71,7 +71,7 @@ class action_plugin_markdownextra extends DokuWiki_Action_Plugin {
            $event->data['script'][] = array(
                 'type'    => 'text/javascript',
                 '_data'   => '',
-                'src'     => $meltdownBase.'js/lib/textinputs_jquery.js');
+                'src'     => $meltdownBase.'js/lib/rangyinputs-jquery.min.js');
            $event->data['script'][] = array(
                 'type'    => 'text/javascript',
                 '_data'   => '',
