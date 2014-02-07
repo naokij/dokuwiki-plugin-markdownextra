@@ -1,0 +1,24 @@
+/* Disabling tools that are incompatible with the markdown editor */
+.markdownextra_disabledtools {
+	position: relative;
+	opacity: .5;
+}
+.markdownextra_disabledtools:hover {
+	opacity: 1;
+}
+.markdownextra_disabledtools .markdownextra_disabledtools_overlay {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(64,64,64,.6);
+	text-align: center;
+	color: white;
+	cursor: pointer;
+}
+
+/* For CSS3 browsers: allow user to resize the preview: */
+.meltdown_preview { resize: vertical; }
+/* Cosmetic fixes due to editor and preview being reversed: */
+.meltdown_wrap textarea { margin-bottom: 5px !important; }

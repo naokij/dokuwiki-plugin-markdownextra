@@ -7,4 +7,7 @@
  */
  
 
-$lang['frontmatter'] = "Enable front matter?(Front matter is a text block at the top of a page with .md suffix. Starts and ends with ---. Content of front matter will not be embedded in markdown block but remain accessible by other plugins. Userful when you want to use this plugin together with the tag plugin.)";
+$lang['frontmatter'] = "Enable front matter ? (Front matter is a text block at the top of a page with .md suffix. Starts and ends with ---. Content of front matter will not be embedded in markdown block but remain accessible by other plugins. Userful when you want to use this plugin together with the tag plugin.)";
+$lang['markdowneditor'] = "Markdown editor (for pages with .md suffix)";
+$lang['markdowneditor_o_none'] = 'none';
+$lang['markdowneditor_o_meltdown'] = 'Meltdown';

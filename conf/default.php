@@ -4,3 +4,4 @@
  */
 
 $conf['frontmatter'] = false;
+$conf['markdowneditor'] = 'meltdown';
