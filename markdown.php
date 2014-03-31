@@ -56,6 +56,7 @@ define( 'MARKDOWNEXTRA_VERSION',  "1.2.8" ); # 29 Nov 2013
 
 @define( 'MARKDOWN_PARSER_CLASS',  'MarkdownExtra_Parser' );
 
+require(DOKU_INC . 'inc/geshi.php');
 function Markdown($text) {
 #
 # Initialize the parser and return the result of its transform method.
@@ -2961,7 +2962,14 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		$classname =& $matches[2];
 		$attrs     =& $matches[3];
 		$codeblock = $matches[4];
-		$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
+
+		if ($classname != '') {
+			$gsh = new GeSHi($codeblock, $classname);
+			$codeblock = $gsh->parse_code();
+		} else {
+			$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
+		}
+
 		$codeblock = preg_replace_callback('/^\n+/',
 			array(&$this, '_doFencedCodeBlocks_newlines'), $codeblock);
 
@@ -2972,10 +2980,10 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		} else {
 			$attr_str = $this->doExtraAttributes($this->code_attr_on_pre ? "pre" : "code", $attrs);
 		}
-		$pre_attr_str  = $this->code_attr_on_pre ? $attr_str : '';
+		//$pre_attr_str  = $this->code_attr_on_pre ? $attr_str : '';
 		$code_attr_str = $this->code_attr_on_pre ? '' : $attr_str;
-		$codeblock  = "<pre$pre_attr_str><code$code_attr_str>$codeblock</code></pre>";
-		
+		$codeblock  = "<code$code_attr_str>$codeblock</code>";
+
 		return "\n\n".$this->hashBlock($codeblock)."\n\n";
 	}
 	function _doFencedCodeBlocks_newlines($matches) {
