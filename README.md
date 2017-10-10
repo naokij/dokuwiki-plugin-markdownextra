@@ -15,7 +15,7 @@
 
 ##Download and Installation
 
-Download and install the plugin using the Plugin Manager using the following URL. Refer to [[:Plugins]] on how to install plugins manually.
+Download and install the plugin using the Plugin Manager using the URL https://github.com/ajwillia-ms/dokuwiki-plugin-markdownextra/tarball/master . Refer to [[:Plugins]] on how to install plugins manually.
 
 
 
@@ -27,8 +27,10 @@ If the page name ends with ''.md'' suffix, it gets automatically parsed using PH
     Header 1
     ========
 
-    ~~~
-    some code
+    ~~~ .c
+    int method() {
+      return 5;
+    }
     ~~~
 
     Paragraph
