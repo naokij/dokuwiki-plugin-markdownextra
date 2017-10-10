@@ -2968,14 +2968,17 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		if ($classname != "") {
 			if ($classname{0} == '.')
 				$classname = substr($classname, 1);
-			$attr_str = ' class="'.$this->code_class_prefix.$classname.'"';
+			$attr_str = ' class="code '.$this->code_class_prefix.$classname.'"';
 		} else {
 			$attr_str = $this->doExtraAttributes($this->code_attr_on_pre ? "pre" : "code", $attrs);
 		}
 		$pre_attr_str  = $this->code_attr_on_pre ? $attr_str : '';
 		$code_attr_str = $this->code_attr_on_pre ? '' : $attr_str;
-		$codeblock  = "<pre$pre_attr_str><code$code_attr_str>$codeblock</code></pre>";
-		
+
+		// apply syntax metadata to the code block
+		$syntaxcode = p_xhtml_cached_geshi($codeblock, $classname, null);
+		$codeblock  = "<pre$pre_attr_str><code$code_attr_str>$syntaxcode</code></pre>";
+
 		return "\n\n".$this->hashBlock($codeblock)."\n\n";
 	}
 	function _doFencedCodeBlocks_newlines($matches) {
