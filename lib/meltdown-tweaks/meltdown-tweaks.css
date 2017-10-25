@@ -21,13 +21,14 @@
 /* For CSS3 browsers: allow user to resize the preview: */
 .meltdown_preview { resize: vertical; }
 /* Cosmetic fixes due to editor and preview being reversed: */
+.meltdown_wrap {
+	width: 100% !important;
+}
+
 .meltdown_wrap textarea {
-       margin-bottom: 5px !important;
-       width: 100% !important;
+	padding: 0;
 }
 
-/* Add resetting of some CSS properties from custom stylesheets */
 .meltdown_bar, .meltdown_bar .meltdown_control span {
-       box-sizing: content-box;
+	box-sizing: content-box;
 }
-
