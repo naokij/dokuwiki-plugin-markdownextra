@@ -1133,10 +1133,7 @@ class Markdown_Parser {
 		return $text;
 	}
 	function _doCodeBlocks_callback($matches) {
-		$codeblock = $matches[1];
-
-		$codeblock = $this->outdent($codeblock);
-		$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
+		$codeblock = $this->outdent($matches[1]);
 
 		# trim leading newlines and trailing newlines
 		$codeblock = preg_replace('/\A\n+|\n+\z/', '', $codeblock);
@@ -1150,8 +1147,7 @@ class Markdown_Parser {
 	#
 	# Create a code span markup for $code. Called from handleSpanToken.
 	#
-		$code = htmlspecialchars(trim($code), ENT_NOQUOTES);
-		return $this->hashPart("<code>$code</code>");
+		return $this->hashPart("<code>".trim($code)."</code>");
 	}
 
 
@@ -2961,7 +2957,6 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		$classname =& $matches[2];
 		$attrs     =& $matches[3];
 		$codeblock = $matches[4];
-		$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
 		$codeblock = preg_replace_callback('/^\n+/',
 			array(&$this, '_doFencedCodeBlocks_newlines'), $codeblock);
 
