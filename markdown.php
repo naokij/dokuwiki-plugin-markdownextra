@@ -1133,10 +1133,7 @@ class Markdown_Parser {
 		return $text;
 	}
 	function _doCodeBlocks_callback($matches) {
-		$codeblock = $matches[1];
-
-		$codeblock = $this->outdent($codeblock);
-		$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
+		$codeblock = $this->outdent($matches[1]);
 
 		# trim leading newlines and trailing newlines
 		$codeblock = preg_replace('/\A\n+|\n+\z/', '', $codeblock);
@@ -1150,8 +1147,7 @@ class Markdown_Parser {
 	#
 	# Create a code span markup for $code. Called from handleSpanToken.
 	#
-		$code = htmlspecialchars(trim($code), ENT_NOQUOTES);
-		return $this->hashPart("<code>$code</code>");
+		return $this->hashPart("<code>".trim($code)."</code>");
 	}
 
 
@@ -2961,21 +2957,23 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		$classname =& $matches[2];
 		$attrs     =& $matches[3];
 		$codeblock = $matches[4];
-		$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
 		$codeblock = preg_replace_callback('/^\n+/',
 			array(&$this, '_doFencedCodeBlocks_newlines'), $codeblock);
 
 		if ($classname != "") {
 			if ($classname{0} == '.')
 				$classname = substr($classname, 1);
-			$attr_str = ' class="'.$this->code_class_prefix.$classname.'"';
+			$attr_str = ' class="code '.$this->code_class_prefix.$classname.'"';
 		} else {
 			$attr_str = $this->doExtraAttributes($this->code_attr_on_pre ? "pre" : "code", $attrs);
 		}
 		$pre_attr_str  = $this->code_attr_on_pre ? $attr_str : '';
 		$code_attr_str = $this->code_attr_on_pre ? '' : $attr_str;
-		$codeblock  = "<pre$pre_attr_str><code$code_attr_str>$codeblock</code></pre>";
-		
+
+		// apply syntax metadata to the code block
+		$syntaxcode = p_xhtml_cached_geshi($codeblock, $classname, null);
+		$codeblock  = "<pre$pre_attr_str><code$code_attr_str>$syntaxcode</code></pre>";
+
 		return "\n\n".$this->hashBlock($codeblock)."\n\n";
 	}
 	function _doFencedCodeBlocks_newlines($matches) {
